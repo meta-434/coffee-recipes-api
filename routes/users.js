@@ -13,9 +13,9 @@ router.post("/login", (req, res, next) => {
   }
 );
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", async (req, res, next) => {
   const { email, password } = req.query;
-  const result = usersService.createUser(email, password);
+  const result = await usersService.createUser(email, password);
   console.log('result', result);
   res.status(200).send(`success: uid=${result}`);
 })

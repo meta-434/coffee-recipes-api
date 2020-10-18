@@ -2,7 +2,7 @@ const admin = require('../firebase');
 
 const usersService = {
     createUser(displayName, photo, email, password) {
-        admin.auth().createUser({
+        return admin.auth().createUser({
             email: email,
             emailVerified: false,
             password: password,
