@@ -117,3 +117,6 @@ dist
 
 # webstorm files
 .idea/
+
+# google admin key json
+coffee-app-ebcd9-f4a00ec150dd.json

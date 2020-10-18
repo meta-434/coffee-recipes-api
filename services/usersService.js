@@ -1,13 +1,22 @@
-const firebase = require('../firebase');
+const admin = require('../firebase');
 
 const usersService = {
-    createUser(email, password) {
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            //console.error(`error in createUser() => ${errorCode} : ${errorMessage}`);
-            return new Error(`{message: error in createUser() => ${errorCode} : ${errorMessage}`);
+    createUser(displayName, photo, email, password) {
+        admin.auth().createUser({
+            email: email,
+            emailVerified: false,
+            password: password,
+            displayName: displayName || 'John Doe',
+            disabled: false
         })
+            .then(function(userRecord) {
+                // See the UserRecord reference doc for the contents of userRecord.
+                console.log('Successfully created new user:', userRecord.uid);
+                return userRecord.uid;
+            })
+            .catch(function(error) {
+                console.log('Error creating new user:', error);
+            });
     },
     signIn(email, password) {
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {

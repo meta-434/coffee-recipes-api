@@ -2,6 +2,14 @@ require('dotenv').config();
 const firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
+const admin = require("firebase-admin");
+const serviceAccount = require('./coffee-app-ebcd9-f4a00ec150dd.json');
+
+// admin firebase initialization
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://coffee-app-ebcd9.firebaseio.com"
+});
 
 //firebase initialization
 const firebaseConfig = {
@@ -16,4 +24,5 @@ const firebaseConfig = {
 }
 firebase.initializeApp(firebaseConfig);
 
-module.exports = firebase;
+
+module.exports = admin;
