@@ -4,7 +4,9 @@
   "private": false,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "set DEBUG=coffee-recipes-api:* && nodemon yarn start"
+    "dev": "set DEBUG=coffee-recipes-api:* && nodemon yarn start",
+    "test": "jest",
+    "deploy": "***"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,6 +16,7 @@
     "firebase": "^7.24.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jest": "^26.6.3",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.5"
   },
