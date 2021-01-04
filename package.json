@@ -7,7 +7,7 @@
     "dev": "set DEBUG=coffee-recipes-api:* && nodemon yarn start",
     "lint": "eslint",
     "check-types": "yarn run test --passWithNoTests",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "deploy": "***"
   },
   "dependencies": {
