@@ -1,28 +1,20 @@
-require('dotenv').config();
-const firebase = require('firebase/app');
-require('firebase/auth');
-require('firebase/database');
-const admin = require("firebase-admin");
-const serviceAccount = require('./coffee-app-ebcd9-f4a00ec150dd.json');
+const firebase = require("firebase/app");
 
-// admin firebase initialization
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://coffee-app-ebcd9.firebaseio.com"
-});
+require("firebase/auth");
+require("firebase/firestore");
+require("firebase/database");
 
-//firebase initialization
 const firebaseConfig = {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
-    databaseURL: process.env.databaseURL,
-    projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.messagingSenderId,
-    appId: process.env.appId,
-    measurementId: process.env.measurementId,
-}
+    apiKey: process.env.API_KEY,
+    authDomain: `${process.env.PROJECT_ID}.firebaseapp.com`,
+    databaseURL: `https://${process.env.PROJECT_ID}.firebaseio.com`,
+    projectId: `${process.env.PROJECT_ID}`,
+    storageBucket: `${process.env.PROJECT_ID}.appspot.com`,
+    messagingSenderId: `${process.env.SENDER_ID}`,
+    appId: `${process.env.APP_ID}`,
+    measurementId: `G-${process.env.MEASUREMENT_ID}`,
+};
+
 firebase.initializeApp(firebaseConfig);
 
-
-module.exports = admin;
+module.exports = firebase;
