@@ -3,36 +3,36 @@ const firebase = require('../firebase');
 const fb = firebase.database();
 const ref = fb.ref('/users');
 
-
-// ref.push({
-//     value: 'lost like tears in the rain'
-// })
-//
-// ref.once('value', (snap) => {
-//     const data = snap.val();
-//     console.log('data', data);
-// })
-
 const usersService = {
-    createUser(username, password) {
-        const newUserRef = ref.push({
-            username,
-            password
-        }, (e) => {
-            if (e) {
-                throw new Error(`error: ${e}`);
+    async createUser(username, password) {
+        let err = '';
+        let UUID = '';
+        const fbReq = await ref.orderByChild("username").equalTo(username).once("value", snap => {
+            if (snap.exists()) {
+                err = "user already exists!";
             } else {
-                console.log(`success`);
+                console.log('\nusername not present in DB, proceeding...\n');
+               UUID = ref.push({
+                    username,
+                    password
+                }, (e) => {
+                    if (e) {
+                        err += new Error(e);
+                    } else {
+                        console.log('\nuser successfully created!\n');
+                    }
+                });
             }
         });
 
-        return newUserRef.key;
+        if (!!err) throw err
+        else return UUID.key;
     },
-    signIn(email, password) {
-
+    async signIn(username, password) {
+        return await username;
     },
-    signOut() {
-       // is this even necessary?
+    async deleteUser(username) {
+        return username;
     }
 };
 

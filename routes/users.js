@@ -3,24 +3,46 @@ const usersService = require("../services/usersService");
 const router = express.Router();
 
 
-/* GET users listing. */
-router.get('/', (req, res, next) => {
-  res.send('respond with a resource');
-});
-
-router.post("/login", (req, res, next) => {
-  const { displayName, photo, email, password } = req.query;
-  usersService.signIn(displayName, photo, email, password);
+// GET UUID IF USER EXISTS
+router.get("/login", async (req, res, next) => {
+  const { username, password } = req.query;
+  const result = await usersService.signIn(username, password).catch(e => {
+    if (!!e) return res
+        .status(400)
+        .json(e)
+  })
   }
 );
 
+// CREATE UUID IF USER DOES NOT EXIST
 router.post("/signup", async (req, res, next) => {
   const { username, password } = req.body;
-  const result = usersService.createUser(username, password);
-  res.status(200).json({
-      status: `new key @ ${result}`,
-      message: `success`
-      });
+  await usersService.createUser(username, password)
+      .then(result => {
+        res
+            .status(200)
+            .json({
+              data: {
+                status: `success`,
+                UUID: result
+              }
+            })
+            .end();
+      })
+      .catch(e => {
+    if (e) {
+      res
+          .status(400)
+          .json({
+            data: {
+              status: 'error',
+              description: ''+e
+            }
+          })
+          .end();
+    }
+  });
+
 })
 
 module.exports = router;

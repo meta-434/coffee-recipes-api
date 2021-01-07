@@ -24,6 +24,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/coffee', coffeeRouter);
 
-app.listen(4000, ()=>{})
+app.listen(4000, ()=>{console.log('\n [!] app is listening on port 4000 \n')})
 
 module.exports = app;
