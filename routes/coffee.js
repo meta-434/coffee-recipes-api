@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
 const coffeeService = require('../services/coffeeService');
-const admin = require('../firebase');
+
 
 /* Test GET function */
 router.get('/', (req, res, next) => {

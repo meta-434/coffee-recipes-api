@@ -7,9 +7,9 @@
         "url": "https://equipped-mantis-70.hasura.app/v1/graphql",
         "headers": {
           "user-agent": "JS GraphQL",
-          "x-hasura-admin-secret": process.env.HASURA_SECRET,
+          "x-hasura-admin-secret": "PtKK2cJWIiQq6iAnzb3P5wSiaJx1VR4LtKiq2Hn51Axau0vLikEFmGTg4coSpiLD"
         },
-        "introspect": true
+        "introspect": false
       }
     }
   }

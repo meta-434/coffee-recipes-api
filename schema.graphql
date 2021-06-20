@@ -1,6 +1,15 @@
-(const typeDefs = graphql``);
-query {
-    users
+query users {
+        users {
+            id
+            created_at
+            display_name
+            email
+            password_salt
+            hashed_password
+            is_active
+        }
 }
 
+type Query {
 
+}
